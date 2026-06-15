@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roberto Davison — PPS 1 Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:   #1a1a1a;
+    --cream: #f7f4ee;
+    --sage:  #5c7a5e;
+    --rust:  #b85c38;
+    --slate: #3d5a6c;
+    --gold:  #c9a84c;
+    --plum:  #6b4f8a;
+    --mid:   #6b7280;
+    --white: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.7; font-size: 16px; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 52px;
+  }
+  nav .brand { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; }
+  nav ul { display: flex; gap: 1.25rem; list-style: none; }
+  nav ul a { color: #aaa; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; transition: color 0.2s; }
+  nav ul a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 84vh; }
+  .hero-left {
+    background: var(--ink); color: var(--cream);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem;
+  }
+  .eyebrow { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.25rem; }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 4.5vw, 4.2rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.25rem; }
+  .hero-name em { font-style: normal; color: var(--gold); }
+  .hero-bio { font-size: 0.95rem; color: #b0b0b0; max-width: 38ch; margin-bottom: 2rem; line-height: 1.85; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .tag { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.75rem; border: 1px solid #3a3a3a; border-radius: 2px; color: #888; }
+
+  .hero-right {
+    background: var(--sage);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 3.5rem 3.5rem;
+    gap: 1rem;
+  }
+  .quote-block { background: rgba(0,0,0,0.18); border-radius: 4px; padding: 1.5rem; }
+  .quote-text { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--white); font-style: italic; line-height: 1.55; margin-bottom: 0.6rem; }
+  .quote-attr { font-size: 0.72rem; color: rgba(255,255,255,0.55); font-family: 'Space Mono', monospace; letter-spacing: 0.07em; }
+  .trait-block { background: rgba(0,0,0,0.15); border-radius: 4px; padding: 1.1rem 1.4rem; }
+  .trait-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.45); margin-bottom: 0.3rem; }
+  .trait-name { font-weight: 600; color: var(--white); font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .trait-desc { font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+  /* SHARED SECTION */
+  .section { max-width: 1080px; margin: 0 auto; padding: 4.5rem 2rem; }
+  .sec-head { display: flex; align-items: baseline; gap: 1.25rem; margin-bottom: 2.5rem; border-bottom: 1px solid #ddd; padding-bottom: 0.85rem; }
+  .sec-num { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--mid); letter-spacing: 0.1em; }
+  .sec-title { font-family: 'Playfair Display', serif; font-size: 1.85rem; font-weight: 700; }
+  .sec-sub { font-size: 0.75rem; color: var(--mid); font-family: 'Space Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; margin-left: auto; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start; }
+  .about-text p { font-size: 0.95rem; line-height: 1.8; color: #2a2a2a; }
+  .about-text p + p { margin-top: 0.9rem; }
+  .info-stack { display: flex; flex-direction: column; gap: 0.85rem; }
+  .info-card { background: var(--white); border-radius: 5px; padding: 1rem 1.25rem; border-left: 3px solid var(--sage); }
+  .info-card-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--mid); margin-bottom: 0.3rem; }
+  .info-card-value { font-size: 0.9rem; font-weight: 500; }
+  .info-card a { color: var(--sage); text-decoration: none; }
+  .info-card a:hover { text-decoration: underline; }
+
+  /* JOURNAL SECTION */
+  .journal-section { background: var(--ink); }
+  .journal-inner { max-width: 1080px; margin: 0 auto; padding: 4rem 2rem; }
+  .journal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+  .journal-title { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; color: var(--white); }
+  .journal-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.4rem; }
+  .open-btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: var(--gold); color: var(--ink); font-weight: 700;
+    font-size: 0.8rem; padding: 0.6rem 1.2rem; border-radius: 3px;
+    text-decoration: none; font-family: 'Space Mono', monospace;
+    letter-spacing: 0.06em; transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .open-btn:hover { opacity: 0.85; }
+  .slides-embed { width: 100%; aspect-ratio: 16/9; border: none; border-radius: 4px; }
+  .journal-note { margin-top: 1rem; font-size: 0.8rem; color: #777; font-family: 'Space Mono', monospace; }
+
+  /* LO PAGES */
+  .lo-page-white { background: var(--white); }
+  .lo-page-cream { background: var(--cream); }
+  .lo-inner { max-width: 1080px; margin: 0 auto; padding: 4.5rem 2rem; }
+
+  .lo-header { display: grid; grid-template-columns: auto 1fr; gap: 1.75rem; align-items: center; margin-bottom: 2.75rem; }
+  .lo-badge {
+    width: 68px; height: 68px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900;
+    color: var(--white); flex-shrink: 0;
+  }
+  .b1 { background: var(--sage); }
+  .b2 { background: var(--slate); }
+  .b3 { background: var(--rust); }
+  .b4 { background: var(--gold); }
+  .b5 { background: var(--plum); }
+
+  .lo-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.25rem; }
+  .lo-heading { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; }
+  .lo-skill { font-size: 0.8rem; color: var(--mid); margin-top: 0.2rem; }
+  .lo-skill strong { color: var(--ink); }
+
+  .lo-body { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .lo-prose p { font-size: 0.94rem; line-height: 1.82; color: #2a2a2a; }
+  .lo-prose p + p { margin-top: 0.9rem; }
+  .lo-prose h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin: 1.5rem 0 0.4rem; color: var(--ink); }
+
+  .concepts-row { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.25rem; }
+  .pill { font-size: 0.68rem; font-family: 'Space Mono', monospace; padding: 0.28rem 0.65rem; border-radius: 20px; border: 1px solid #ccc; color: var(--mid); }
+  .pill.on1 { background: var(--sage); color: #fff; border-color: var(--sage); }
+  .pill.on2 { background: var(--slate); color: #fff; border-color: var(--slate); }
+  .pill.on3 { background: var(--rust); color: #fff; border-color: var(--rust); }
+  .pill.on4 { background: var(--gold); color: #fff; border-color: var(--gold); }
+  .pill.on5 { background: var(--plum); color: #fff; border-color: var(--plum); }
+
+  .artifact-card { border-radius: 7px; overflow: hidden; border: 1px solid #e5e5e5; background: #f9f9f7; }
+  .card-top { height: 4px; }
+  .ct1 { background: var(--sage); }
+  .ct2 { background: var(--slate); }
+  .ct3 { background: var(--rust); }
+  .ct4 { background: var(--gold); }
+  .ct5 { background: var(--plum); }
+  .card-body { padding: 1.5rem; }
+  .card-label { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.45rem; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .context-badge { display: inline-block; font-size: 0.65rem; font-family: 'Space Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; background: var(--ink); color: var(--cream); padding: 0.22rem 0.55rem; border-radius: 2px; margin-bottom: 0.9rem; }
+  .card-desc { font-size: 0.86rem; color: var(--mid); line-height: 1.72; }
+  .card-link {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    margin-top: 1.1rem; font-size: 0.78rem; font-weight: 600;
+    text-decoration: none; padding: 0.42rem 0.95rem; border-radius: 3px;
+    border: 1.5px solid; transition: all 0.18s;
+  }
+  .cl1 { color: var(--sage); border-color: var(--sage); }
+  .cl1:hover { background: var(--sage); color: #fff; }
+  .cl2 { color: var(--slate); border-color: var(--slate); }
+  .cl2:hover { background: var(--slate); color: #fff; }
+  .cl3 { color: var(--rust); border-color: var(--rust); }
+  .cl3:hover { background: var(--rust); color: #fff; }
+  .cl4 { color: #8a6a10; border-color: var(--gold); }
+  .cl4:hover { background: var(--gold); color: #fff; }
+  .cl5 { color: var(--plum); border-color: var(--plum); }
+  .cl5:hover { background: var(--plum); color: #fff; }
+
+  /* DIVIDER */
+  hr.soft { border: none; border-top: 1px solid #e5e5e5; margin: 0; }
+
+  /* FOOTER */
+  footer { background: var(--ink); text-align: center; padding: 2.25rem 1rem; font-family: 'Space Mono', monospace; font-size: 0.72rem; color: #555; letter-spacing: 0.06em; }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; }
+    .about-grid, .lo-body { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="brand">Roberto Davison &middot; PPS 1</span>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#lo1">LO 1</a></li>
+    <li><a href="#lo2">LO 2</a></li>
+    <li><a href="#lo3">LO 3</a></li>
+    <li><a href="#lo4">LO 4</a></li>
+    <li><a href="#lo5">LO 5</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="eyebrow">PPS 1 Portfolio &middot; Brien McMahon &middot; 2025&ndash;26</p>
+    <h1 class="hero-name">Roberto<br><em>Davison</em></h1>
+    <p class="hero-bio">Born and raised in Norwalk, CT. Mexican mom, American dad. I grew up between two languages and two cultures, and that's basically what most of this portfolio is about.</p>
+    <div class="tags">
+      <span class="tag">Norwalk, CT</span>
+      <span class="tag">Mexican-American</span>
+      <span class="tag">Spanish / English</span>
+      <span class="tag">IB Career-Related Programme</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="quote-block">
+      <p class="quote-text">"We don't want tradition. We want to live in the present and the only history that is worth a tinker's dam is the history we make today."</p>
+      <p class="quote-attr">&mdash; Henry Ford &middot; My chosen quote, PPS Journal</p>
+    </div>
+    <div class="trait-block">
+      <p class="trait-label">IB Learner Trait I Embody</p>
+      <p class="trait-name">Thinker</p>
+      <p class="trait-desc">In group work I usually end up trying to combine different approaches into one plan rather than pushing my own idea.</p>
+    </div>
+    <div class="trait-block">
+      <p class="trait-label">IB Learner Trait I Am Improving</p>
+      <p class="trait-name">Communicator</p>
+      <p class="trait-desc">My thoughts are usually more put-together than what comes out when I actually speak. Working on closing that gap.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section">
+    <div class="sec-head">
+      <span class="sec-num">00</span>
+      <h2 class="sec-title">About Me</h2>
+      <span class="sec-sub">Home Page</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>My name is Roberto Davison. I was born and raised in Norwalk, CT, by a Mexican mother from Saltillo, Coahuila and an American father. Growing up my first language was Spanish, although that's not saying much because my English improved way faster and basically overtook it. I've always spoken to my mom in Spanish one-on-one, which I'm grateful for, and my siblings and I all went to a dual-language elementary school where half the subjects were taught in Spanish.</p>
+        <p>The experience that actually changed me was the year I spent in Xalapa, Veracruz before eighth grade, living with my aunt and going to school there. My aunt reached out with the offer and after a short deliberation I took her up on it. I wasn't there as a tourist, I was enrolled in school and navigating a completely different regional culture, accent, and social world. I made a lot of connections there and grew a lot closer to my own culture and heritage during that time. In my memory my Mexican family feels like a collage of images, feelings, flavors, and scents. My American family is more defined. I live in both worlds at the same time.</p>
+        <p>In high school I've been doing theatre (I performed in Grease), taking IB Spanish where I share class with native speakers, and working through the projects in PPS 1. This portfolio collects that work across the five learning outcomes.</p>
+        <p>Pathway: IB Career-Related Programme, because it connects academic work with real-world application, which is how I actually prefer to learn things. My future interests are somewhere in language, communication, and culture. I'm 17, so we'll see.</p>
+      </div>
+      <div class="info-stack">
+        <div class="info-card">
+          <p class="info-card-label">School &amp; Grade</p>
+          <p class="info-card-value">Sophomore &middot; Brien McMahon High School</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">Pathway</p>
+          <p class="info-card-value">IB Career-Related Programme</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">Languages</p>
+          <p class="info-card-value">English &amp; Spanish (fluent in both)</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">Cultural Summary</p>
+          <p class="info-card-value"><a href="#">&rarr; View My Cultural Summary</a></p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">Contact</p>
+          <p class="info-card-value"><a href="mailto:roberto.davison@student.npsk12.com">roberto.davison@student.npsk12.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PPS JOURNAL -->
+<section id="journal" class="journal-section">
+  <div class="journal-inner">
+    <div class="journal-header">
+      <div>
+        <span class="journal-label">Reference Document</span>
+        <h2 class="journal-title">My PPS Journal</h2>
+      </div>
+      <a class="open-btn" href="https://docs.google.com/presentation/d/1dwgjwrekyhGeFfDt833aybANh8GeH4yKpKrz2Y3P0x0/edit?usp=sharing" target="_blank">
+        &#8599; Open in Google Slides
+      </a>
+    </div>
+    <iframe
+      class="slides-embed"
+      src="https://docs.google.com/presentation/d/1dwgjwrekyhGeFfDt833aybANh8GeH4yKpKrz2Y3P0x0/embed?start=false&loop=false&delayms=3000"
+      allowfullscreen="true"
+      mozallowfullscreen="true"
+      webkitallowfullscreen="true">
+    </iframe>
+    <p class="journal-note">Use the arrows inside the embed to navigate, or open it in Google Slides for full view.</p>
+  </div>
+</section>
+
+<hr class="soft">
+
+<!-- LO 1 -->
+<section id="lo1" class="lo-page-white">
+  <div class="lo-inner">
+    <div class="lo-header">
+      <div class="lo-badge b1">1</div>
+      <div>
+        <p class="lo-eyebrow">Learning Outcome 1</p>
+        <h2 class="lo-heading">Intrapersonal Skills</h2>
+        <p class="lo-skill">Skill: <strong>Reflection &amp; Reflexivity</strong> &middot; Context: <strong>Personal Life</strong></p>
+      </div>
+    </div>
+    <div class="lo-body">
+      <div class="lo-prose">
+        <p>For LO1 I chose the Cultural Summary because it's the assignment where I had to actually sit down and take stock of who I am and where I come from. The assignment asked for a personal narrative, basically a written autobiography, along with a breakdown of my social perspectives on things like religion, education, family, and the world. I'd never had to do that in a formal, structured way before.</p>
+        <p>Writing it out made some things clearer that I hadn't really examined before. My relationship with language is a good example. Spanish was technically my first language, but my English developed so much faster growing up that I sometimes feel like I'm playing catch-up in the language I was supposed to know better. Writing that down for the first time made me think about why that happened and what it actually means for how I move through both cultures.</p>
+        <p>The social perspectives section was harder because it asked me to take actual positions, not just describe things. My view on religion, for instance, is that a lot of religious belief came out of filling in gaps in human knowledge, and as people become more educated some of those beliefs become harder to justify. I wouldn't say that at the dinner table but the assignment asked me to be honest, so I was. That kind of self-examination is what I think reflection and reflexivity actually means in practice.</p>
+        <h4>IB Concept Connections</h4>
+        <p><strong>Change:</strong> Writing the narrative made me see how my relationship to both cultures has shifted at different points in my life. The year in Xalapa before eighth grade is the clearest example. My understanding of my own identity changed a lot during that year, and the Cultural Summary was the first time I'd written about that in a serious way.</p>
+        <p><strong>Identities:</strong> The assignment asks you to describe your cultural background and your social perspectives together, which made the connection between the two more visible. Where I grew up, what languages I spoke, who was around me shaped how I think about the world in ways I was able to name more specifically after writing this.</p>
+        <div class="concepts-row">
+          <span class="pill on1">Change</span>
+          <span class="pill on1">Identities</span>
+          <span class="pill">Well-being</span>
+          <span class="pill">Perspectives</span>
+        </div>
+      </div>
+      <div>
+        <div class="artifact-card">
+          <div class="card-top ct1"></div>
+          <div class="card-body">
+            <p class="card-label">Artifact</p>
+            <h3 class="card-title">My Cultural Summary</h3>
+            <span class="context-badge">Personal Life</span>
+            <p class="card-desc">A written personal narrative covering my cultural background and upbringing, followed by a breakdown of my social perspectives on the world, religion, education, family, and media. Written in Part 1 and Part 2 format for PPS 1.</p>
+            <p class="card-desc" style="margin-top: 0.7rem;">The artifact demonstrates reflection and reflexivity because it asked me to look inward and take actual positions, not just describe my background. The process of writing it changed how I understood some things about myself.</p>
+            <a class="card-link cl1" href="#">&rarr; View Cultural Summary</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="soft">
+
+<!-- LO 2 -->
+<section id="lo2" class="lo-page-cream">
+  <div class="lo-inner">
+    <div class="lo-header">
+      <div class="lo-badge b2">2</div>
+      <div>
+        <p class="lo-eyebrow">Learning Outcome 2</p>
+        <h2 class="lo-heading">Interpersonal Skills</h2>
+        <p class="lo-skill">Skill: <strong>Communication</strong> &middot; Context: <strong>Informal Learning</strong></p>
+      </div>
+    </div>
+    <div class="lo-body">
+      <div class="lo-prose">
+        <p>For LO2 I went with the Teach Something presentation. I chose ice skating partly because I've been doing it my whole life, and partly because I had a memory from seventh grade of actually teaching my mom's class at Sono Ice House. That experience stuck with me, and the assignment gave me a reason to go back and think about what I learned from it.</p>
+        <p>The thing I figured out pretty quickly while putting the presentation together is that there's a real difference between being able to do something and being able to teach it. I've never consciously thought about why the stride works, or what you're actually doing with your weight when you push off. I just do it. Having to explain it step by step meant I had to go back and actually understand what I was doing, which made me better at it even though that wasn't the point of the assignment.</p>
+        <p>What also came back from that seventh grade memory was that people learn at completely different rates, and not everyone wants to learn as much as you want to teach them. Some kids got it fast and kept going. Some gave up. Some learned just enough and stopped. You can encourage someone all you want but the decision is still theirs. As a communicator, adapting to all of that in real time is harder than just knowing the material.</p>
+        <p>I noted in my learner profile reflection that I'm more eloquent in my thoughts than in my words. This project was probably the most direct test of that this semester. Standing in front of people and explaining something physical, where you can't skip steps or use vague language, pushed me to be a clearer communicator than I usually am.</p>
+        <h4>IB Concept Connections</h4>
+        <p><strong>Connections:</strong> The assignment opened with a quote from a doctor about how teaching residents makes him better at his own clinical work. I didn't fully believe that until I went through this. Explaining ice skating to someone who's never done it made me understand the mechanics better than I did before I started preparing.</p>
+        <p><strong>Perspectives:</strong> Every person who stepped onto that ice brought a different relationship to risk and failure. Some people were willing to fall. Some weren't. Reading those differences and adjusting how I communicated in the moment is something I got better at over the course of that day.</p>
+        <div class="concepts-row">
+          <span class="pill on2">Connections</span>
+          <span class="pill on2">Perspectives</span>
+          <span class="pill">Identities</span>
+        </div>
+      </div>
+      <div>
+        <div class="artifact-card">
+          <div class="card-top ct2"></div>
+          <div class="card-body">
+            <p class="card-label">Artifact</p>
+            <h3 class="card-title">Mastering the Glide: How to Ice Skate</h3>
+            <span class="context-badge">Informal Learning</span>
+            <p class="card-desc">A 5&ndash;10 minute class presentation teaching the mechanics of ice skating from the ground up, structured around a real experience teaching sixth-graders at Sono Ice House. Covers breaking the "walking" instinct, the stride and push, stopping technique, and what teaching a group actually requires.</p>
+            <p class="card-desc" style="margin-top: 0.7rem;">The presentation also maps ice skating onto IB Learner Profile traits and PPS skill domains, connecting a physical skill to broader personal development frameworks.</p>
+            <a class="card-link cl2" href="#">&rarr; View Presentation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="soft">
+
+<!-- LO 3 -->
+<section id="lo3" class="lo-page-white">
+  <div class="lo-inner">
+    <div class="lo-header">
+      <div class="lo-badge b3">3</div>
+      <div>
+        <p class="lo-eyebrow">Learning Outcome 3</p>
+        <h2 class="lo-heading">Thinking Skills</h2>
+        <p class="lo-skill">Skill: <strong>Critical Thinking &amp; Information Literacy</strong> &middot; Context: <strong>DP Course Work</strong></p>
+      </div>
+    </div>
+    <div class="lo-body">
+      <div class="lo-prose">
+        <p>For LO3 I chose the Information Ecosystem project because it was the most structured data-collection work I did this semester and it required me to actually analyze what I was observing, not just report it.</p>
+        <p>The assignment asked us to create a fresh social media account and deliberately try to shift the algorithm toward content related to our LCS language and culture, then track what happened. I made a brand new Instagram account on April 29th because I wanted a completely clean slate. I started by following @mexicoinmypocket and the Mexican soccer federation account, @fmf. On my normal personal accounts my feed is basically just sports clips and whatever my friends in Norwalk are posting, so I wanted to see how much the algorithm would shift when I changed the inputs.</p>
+        <p>I kept a log from April 29th to May 15th. The feed shift happened faster than I expected. By May 1st my Reels were full of Mexican travel content. By May 5th those accounts were showing up on my main feed without me having to search for them. By May 9th the homepage was basically flooded. By the end of the project the algorithm was recommending smaller regional accounts I hadn't interacted with at all.</p>
+        <p>The part that made me actually think critically was what that revealed about my regular feed. I'm Mexican-American and my mom follows all of this content, but my personal account had basically never surfaced any of it. The apps are built to keep feeding you what's familiar and local, so you stay in the same information loop unless you go out of your way to break out. Realizing that the algorithm was shaping what I thought was "normal" without me noticing it was the most interesting finding of the project.</p>
+        <h4>IB Concept Connections</h4>
+        <p><strong>Systems:</strong> The algorithm functions as a system that responds to inputs. The project made that visible in a very concrete way because I could see exactly when my behavior changed and when the output changed in response. It also made me think about information systems more broadly: what you see shapes what you think is important, and vice versa.</p>
+        <p><strong>Perspectives:</strong> The content I started seeing from inside a Mexican cultural space was completely different from how Mexico gets covered in my usual American media. A post from @mexicoinmypocket about street food in Yucatan with the hashtag #ismexicosafe was specifically pushing back on a stereotype that I'd absorbed from that regular feed without really questioning it.</p>
+        <div class="concepts-row">
+          <span class="pill on3">Systems</span>
+          <span class="pill on3">Perspectives</span>
+          <span class="pill">Change</span>
+          <span class="pill">Connections</span>
+        </div>
+      </div>
+      <div>
+        <div class="artifact-card">
+          <div class="card-top ct3"></div>
+          <div class="card-body">
+            <p class="card-label">Artifact</p>
+            <h3 class="card-title">Information Ecosystem Project</h3>
+            <span class="context-badge">DP Course Work</span>
+            <p class="card-desc">A month-long experiment (April 29 &ndash; May 15) reshaping a fresh Instagram account's algorithm toward authentic Mexican cultural content, with a chronological data log tracking inputs and algorithmic outputs at each stage.</p>
+            <p class="card-desc" style="margin-top: 0.7rem;">Includes a two-table data set (account interactivity log and content/perspective log) and a written reflection addressing information literacy, algorithmic systems, and what the experiment revealed about cultural representation in personal media feeds.</p>
+            <a class="card-link cl3" href="#">&rarr; View Ecosystem Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="soft">
+
+<!-- LO 4 -->
+<section id="lo4" class="lo-page-cream">
+  <div class="lo-inner">
+    <div class="lo-header">
+      <div class="lo-badge b4">4</div>
+      <div>
+        <p class="lo-eyebrow">Learning Outcome 4</p>
+        <h2 class="lo-heading">Intercultural Understanding</h2>
+        <p class="lo-skill">Skill: <strong>Empathy &amp; Social Awareness</strong> &middot; Context: <strong>LCS Work</strong></p>
+      </div>
+    </div>
+    <div class="lo-body">
+      <div class="lo-prose">
+        <p>For LO4 I chose the Como Agua Para Chocolate book analysis. I picked it for my LCS focus and honestly from the moment I read the description I knew it was going to connect to my life in a way a lot of assigned books don't. I'm bicultural, my mom is from Saltillo, and the way Esquivel writes about the kitchen was something I recognized immediately.</p>
+        <p>The big theme in the book is food as a form of communication. Tita, the main character, is forbidden from speaking her mind by tradition, so she pours everything into her cooking and the people who eat her food literally feel what she felt when she made it. That's magical realism, but it also describes something I've seen my whole life. My mom's cooking carries her hometown, specific memories, the way things were done in her family. It isn't just food. Analyzing that through a literary lens gave me words for something I'd always known but never really named.</p>
+        <p>What also made the book work as an LCS artifact is that Laura Esquivel actually lived this. The book isn't academic study of Mexican culture, it's her childhood cooking memories on the page. The voice comes from the inside of that culture and you can feel it. That's different from reading a textbook summary of Mexican traditions, and it produced a different kind of understanding.</p>
+        <p>I also spent time in the analysis on the tension between tradition and freedom in the book, which is something I feel in a more personal way as a bicultural person trying to navigate where I come from while also just being my own person. Mama Elena's rules feel absolute in the book just because that's how it's always been. That's a dynamic I recognize.</p>
+        <h4>IB Concept Connections</h4>
+        <p><strong>Identities:</strong> The book pushed me to be more specific about what my Mexican cultural identity actually is. Not just "Mexican-American" in a generic sense, but someone shaped by Saltillo, by a year in Xalapa, by a mom who cooks the same way Esquivel describes. That specificity matters for genuine intercultural understanding.</p>
+        <p><strong>Perspectives:</strong> Reading a book written from inside a culture is a different experience from reading about that culture from the outside. Esquivel writes about food and emotion in a way that assumes the reader understands how those are connected, which meant I had to actually understand it to follow the book, not just memorize a definition.</p>
+        <div class="concepts-row">
+          <span class="pill on4">Identities</span>
+          <span class="pill on4">Perspectives</span>
+          <span class="pill">Connections</span>
+          <span class="pill">Change</span>
+        </div>
+      </div>
+      <div>
+        <div class="artifact-card">
+          <div class="card-top ct4"></div>
+          <div class="card-body">
+            <p class="card-label">Artifact</p>
+            <h3 class="card-title">Como Agua Para Chocolate &mdash; Book Analysis &amp; Presentation</h3>
+            <span class="context-badge">LCS Work</span>
+            <p class="card-desc">A written analysis of Laura Esquivel's novel connecting its themes (food as language, magical realism, female identity, tradition vs. freedom) to my personal bicultural experience, followed by a 5&ndash;7 minute class presentation.</p>
+            <p class="card-desc" style="margin-top: 0.7rem;">Addresses the four required elements: purpose and themes, authenticity of the author's voice, cultural iceberg (surface and deep-level understandings), and personal reflection on whether the book was an effective intercultural tool.</p>
+            <a class="card-link cl4" href="#">&rarr; View Book Analysis</a>
+            <br>
+            <a class="card-link cl4" href="#" style="margin-top: 0.5rem;">&#9654; View Presentation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="soft">
+
+<!-- LO 5 -->
+<section id="lo5" class="lo-page-white">
+  <div class="lo-inner">
+    <div class="lo-header">
+      <div class="lo-badge b5">5</div>
+      <div>
+        <p class="lo-eyebrow">Learning Outcome 5</p>
+        <h2 class="lo-heading">Ethical Implications</h2>
+        <p class="lo-skill">Skill: <strong>Ethical Decision-Making</strong> &middot; Context: <strong>Career-Related Study</strong></p>
+      </div>
+    </div>
+    <div class="lo-body">
+      <div class="lo-prose">
+        <p>For LO5 I chose the Portland Homelessness ethics project. The assignment asked us to look at homelessness in Portland, Oregon through a specific ethical lens, and my group was assigned Care. Care as a lens means thinking about relationships and interdependence rather than just individual outcomes.</p>
+        <p>The data we started with was pretty significant. There are over 15,000 people experiencing homelessness in Oregon, and current shelters can accommodate less than 18% of that population. The racial breakdown is also very disproportionate: Black residents are overrepresented in the homeless population by 4x their share of Portland's general population, and Indigenous residents by 5x. So before even getting to solutions, the ethical question is also about who has been carrying the cost of this problem and why.</p>
+        <p>Our short-term solution was a Housing First system, which means prioritizing getting people into housing before requiring them to address other issues. The long-term model was a community grocery store that employs shelter residents and gradually gives them full control of their income as they build savings. The reasoning behind the long-term plan was that financial stability and a sense of responsibility matter alongside housing, not after it.</p>
+        <p>Earlier in the semester the Moral Machine activity also shaped how I thought about ethics going into this project. Going through those scenarios I made decisions that felt logical in the moment and then had to be honest in my reflection about where my reasoning broke down. I was so focused on community/common good as a framework that I stopped thinking about other factors, like right of way or whether to intervene at all. Seeing that pattern in my own decision-making made me more careful about checking my assumptions when we were designing the homelessness plan.</p>
+        <h4>IB Concept Connections</h4>
+        <p><strong>Systems:</strong> Homelessness is the output of overlapping systems. Housing construction hasn't kept up with population growth. Historical policies displaced communities of color. Wages haven't tracked living costs. The Care lens pushed us to address those systems rather than just the individual people experiencing the result of them.</p>
+        <p><strong>Well-being:</strong> Applying Care as an ethical lens means defining well-being as something relational, not just personal. Our plan tried to address immediate needs (housing) and longer-term stability (employment, savings, a path out) at the same time, because both matter.</p>
+        <div class="concepts-row">
+          <span class="pill on5">Systems</span>
+          <span class="pill on5">Well-being</span>
+          <span class="pill">Identities</span>
+          <span class="pill">Perspectives</span>
+        </div>
+      </div>
+      <div>
+        <div class="artifact-card">
+          <div class="card-top ct5"></div>
+          <div class="card-body">
+            <p class="card-label">Artifact</p>
+            <h3 class="card-title">Care in Homelessness &mdash; Portland, OR Ethics Project</h3>
+            <span class="context-badge">Career-Related Study</span>
+            <p class="card-desc">A group research and presentation project applying the Care ethical lens to homelessness in Portland, Oregon. Includes data visualization, root-cause analysis, short-term Housing First proposals, and a long-term community employment model funded through that system.</p>
+            <p class="card-desc" style="margin-top: 0.7rem;">Also includes the written Moral Machine journal entry (4/24) as supporting context, which documents how examining my own ethical decision-making patterns going into the project changed how I approached the planning work.</p>
+            <a class="card-link cl5" href="#">&rarr; View Ethics Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Roberto Davison &middot; PPS 1 Portfolio &middot; Brien McMahon High School &middot; 2025&ndash;26</p>
+  <p style="margin-top: 0.4rem;"><a href="mailto:roberto.davison@student.npsk12.com">Contact</a> &nbsp;&middot;&nbsp; <a href="https://docs.google.com/presentation/d/1dwgjwrekyhGeFfDt833aybANh8GeH4yKpKrz2Y3P0x0/edit?usp=sharing" target="_blank">PPS Journal</a></p>
+</footer>
+
+</body>
+</html>
